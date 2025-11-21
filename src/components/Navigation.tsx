@@ -275,17 +275,20 @@ const MobileDropdown = ({ title, items, onClose }: { title: string; items: { nam
         <ChevronDown className={cn("h-4 w-4 transition-transform", isOpen && "rotate-180")} />
       </button>
       {isOpen && (
-        <div className="pl-4 pb-2 space-y-1 animate-fade-in">
-          {items.map((item) => (
-            <Link
-              key={item.name}
-              to={item.href}
-              className="block px-4 py-2 text-sm hover:bg-accent rounded-md transition-colors"
-              onClick={onClose}
-            >
-              {item.name}
-            </Link>
-          ))}
+        <div className="pl-4 pb-2 animate-fade-in">
+          <ul className="grid gap-3 p-2 sm:grid-cols-2 bg-popover rounded-md"> {/* Added grid like desktop */}
+            {items.map((item) => (
+              <li key={item.name}>
+                <Link
+                  to={item.href}
+                  className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                  onClick={onClose}
+                >
+                  <div className="text-sm font-medium leading-none">{item.name}</div>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
